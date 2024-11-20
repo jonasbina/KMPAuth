@@ -102,7 +102,7 @@ internal class GoogleAuthUiProviderImpl(
             .setFilterByAuthorizedAccounts(filterByAuthorizedAccounts)
             .setAutoSelectEnabled(true)
             .setServerClientId(serverClientId)
-            .associateLinkedAccounts(linkedServiceId = serverClientId, idTokenDepositionScopes = credentials.scopes.map { it.uri })
+            .associateLinkedAccounts(linkedServiceId = serverClientId, idTokenDepositionScopes = credentials.scopes)
             .build()
     }
 }

@@ -31,13 +31,12 @@ internal class GoogleLegacyAuthentication(
         activityResultState.isInProgress = true
         try {
             activityResultLauncher.launch(signInClient)
-        }
-        catch (e: ActivityNotFoundException){
+        } catch (e: ActivityNotFoundException) {
             println(e.message)
             return null
         }
 
-        withContext(Dispatchers.Default){
+        withContext(Dispatchers.Default) {
             while (activityResultState.isInProgress) yield()
         }
         val data: Intent? = activityResultState.data?.data
@@ -67,14 +66,11 @@ internal class GoogleLegacyAuthentication(
     }
 
     private fun getGoogleSignInOptions(): GoogleSignInOptions {
+        val scopesArray = credentials.scopes.map { Scope(it) }.toTypedArray()
         return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(credentials.serverId)
             .requestEmail()
-            .apply {
-                credentials.scopes.forEach {
-                    requestScopes(Scope(it.uri))
-                }
-            }
+            .requestScopes(scopesArray[0], *scopesArray.drop(1).toTypedArray())
             .build()
     }
 

@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlinNativeCocoaPods)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 kotlin {
@@ -77,6 +78,7 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.core)
             implementation(libs.ktor.core)
+            implementation(libs.kotlinx.serialization.json)
             api(project(":kmpauth-core"))
         }
         jvmMain.dependencies {
@@ -84,6 +86,10 @@ kotlin {
             implementation(libs.ktor.server.netty)
             implementation(libs.ktor.server.html.builder)
             implementation("com.auth0:java-jwt:4.4.0") // Check for the latest version
+        }
+        wasmJsMain.dependencies {
+            //implementation(npm("jsonwebtoken", "9.0.1")) // For JWT handling (if needed)
+//            implementation(kotlin("stdlib-wasm")) // Add the Kotlin standard library for wasmJs HERE
         }
     }
 }

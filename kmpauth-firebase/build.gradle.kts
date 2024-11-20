@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -22,7 +25,6 @@ kotlin {
         binaries.library()
     }
     jvm()
-
     iosX64()
     iosArm64()
     iosSimulatorArm64()
